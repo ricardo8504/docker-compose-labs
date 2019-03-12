@@ -1,0 +1,26 @@
+version: '2'
+services:
+  a:
+    image: tutum/hello-world
+    networks:
+      - frontend
+    external_links:
+      - hello:h
+  b:
+    image: tutum/hello-world
+    networks:
+      - frontend
+      - backend
+  c:
+    image: tutum/hello-world
+    networks:
+      - backend
+      - superbridge
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+  superbridge:
+    external: true

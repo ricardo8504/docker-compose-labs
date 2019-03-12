@@ -1,0 +1,26 @@
+version: '2'
+ 
+services:
+ 
+  mysql:
+    image: mysql:5.7
+    env_file:
+      - mysql.env
+ 
+  wordpress:
+    image: wordpress
+    env_file:
+      - wordpress.env
+    links:
+      - mysql
+ 
+  nginx:
+    image: nginx
+    volumes:
+      - $PWD/default.conf:/etc/nginx/conf.d/default.conf:ro
+    links:
+      - wordpress
+    ports:
+      - "80:80"
+
+
